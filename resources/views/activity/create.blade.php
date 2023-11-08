@@ -1,142 +1,207 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear')
+@section('title', 'Crear Actividad')
 
 @section('content_header')
-    <h1>Registra tu actividad</h1>
 @stop
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="bg-white rounded p-4 border border-2 border-dark">
+                <h1 class="text-center h3">Formulario de Creación de Actividad</h1>
+                <p class="text-center mb-4">Rellena el formulario con los datos que se te piden</p>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header text text-center">
-                <h3>Registrar tu actividad</h3>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ route('activities.store') }}">
+                <form action="{{ route('activities.store') }}" method="POST">
                     @csrf
 
-                    <!-- Actividad -->
-                    <div class="form-group">
-                        <label for="activity">Actividad</label>
-                        <input type="text" name="activity" class="form-control @error('activity') is-invalid @enderror">
-                        @error('activity')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <!-- Nombre -->
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input
+                                id="name"
+                                name="name"
+                                class="form-control form-control-lg"
+                                placeholder="Nombre de la actividad"
+                                type="text"
+                                value="{{ old('name') }}">
+                        </div>
                         @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <div class="text-danger text-center mt-2">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
-                    <!-- Objetivo -->
-                    <div class="form-group">
-                        <label for="objective">Objetivo</label>
-                        <input type="text" name="objective" class="form-control @error('objective') is-invalid @enderror">
+                    <!-- Objective -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input
+                                id="objective"
+                                name="objective"
+                                class="form-control form-control-lg"
+                                placeholder="Objetivo de la actividad"
+                                type="text"
+                                value="{{ old('objective') }}">
+                        </div>
                         @error('objective')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <div class="text-danger text-center mt-2">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
-                    <!-- Competencia -->
-                    <div class="form-group">
-                        <label for="competence">Competencia</label>
-                        <input type="text" name="competence" class="form-control @error('competence') is-invalid @enderror">
+                    <!-- Competence -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input
+                                id="competence"
+                                name="competence"
+                                class="form-control form-control-lg"
+                                placeholder="Competencia"
+                                type="text"
+                                value="{{ old('competence') }}">
+                        </div>
                         @error('competence')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <div class="text-danger text-center mt-2">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
-                    <!-- Temario -->
-                    <div class="form-group">
-                        <label for="syllabus">Temario</label>
-                        <input type="text" name="syllabus" class="form-control @error('syllabus') is-invalid @enderror">
+                    <!-- Syllabus -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input
+                                id="syllabus"
+                                name="syllabus"
+                                class="form-control form-control-lg"
+                                placeholder="Syllabus"
+                                type="text"
+                                value="{{ old('syllabus') }}">
+                        </div>
                         @error('syllabus')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <div class="text-danger text-center mt-2">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
-                    <!-- Periodo -->
-                    <div class="form-group">
-                        <label for="period_id">Periodo</label>
-                        <select name="period_id" class="form-control @error('period_id') is-invalid @enderror">
-                            <option value="">Seleccionar Periodo</option>
-                            @foreach ($periods as $period)
-                                <option value="{{ $period->id }}">{{ $period->long_name }}</option>
-                            @endforeach
-                        </select>
-                        @error('period_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <!-- Autorizada -->
-                    <div class="form-group">
-                        <label for="authorized">Autorizada</label>
-                        <select name="authorized" class="form-control @error('authorized') is-invalid @enderror">
-                            <option value="yes">Sí</option>
-                            <option value="no">No</option>
-                        </select>
+                    <!-- Authorized -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <select class="form-select form-select-lg form-control" name="authorized">
+                                <option value="">Autorización</option>
+                                <option value="not" @if(old('authorized') == 'not') selected @endif>Not Authorized</option>
+                                <option value="yes" @if(old('authorized') == 'yes') selected @endif>Authorized</option>
+                            </select>
+                        </div>
                         @error('authorized')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <div class="text-danger text-center mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <!-- Activity -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input
+                                id="activity"
+                                name="activity"
+                                class="form-control form-control-lg"
+                                placeholder="Número de actividad"
+                                type="number"
+                                inputmode="numeric"
+                                value="{{ old('activity') }}">
+                        </div>
+                        @error('activity')
+                            <div class="text-danger text-center mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <!-- Credits -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input
+                                id="credits"
+                                name="credits"
+                                class="form-control form-control-lg"
+                                placeholder="Créditos"
+                                type="number"
+                                inputmode="numeric"
+                                value="{{ old('credits') }}">
+                        </div>
+                        @error('credits')
+                            <div class="text-danger text-center mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <!-- Period -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <select class="form-select form-select-lg form-control" name="period_id">
+                                <option value="">Selecciona el periodo</option>
+                                @foreach ($periods as $period)
+                                    <option value="{{ $period->id }}" @if(old('period_id') == $period->id) selected @endif>{{ $period->long_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('period_id')
+                            <div class="text-danger text-center">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
                     <!-- Staff -->
-                    <div class="form-group">
-                        <label for="staff_id">Staff</label>
-                        <select name="staff_id" class="form-control @error('staff_id') is-invalid @enderror">
-                            <option value="">Seleccionar Staff</option>
-                            @foreach ($staffs as $staff)
-                                <option value="{{ $staff->id }}">{{ $staff->long_name }}</option>
-                            @endforeach
-                        </select>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <select class="form-select form-select-lg form-control" name="staff_id">
+                                <option value="">Selecciona un Staff</option>
+                                @foreach ($staffs as $staff)
+                                    <option value="{{ $staff->id }}" @if(old('staff_id') == $staff->id) selected @endif>{{ $staff->long_name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
                         @error('staff_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <div class="text-danger text-center">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
-                    <!-- Créditos -->
-                    <div class="form-group">
-                        <label for="credits">Créditos</label>
-                        <input type="text" name="credits" class="form-control @error('credits') is-invalid @enderror">
-                        @error('credits')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                    <!-- User -->
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <select class="form-select form-select-lg form-control" name="user_id">
+                                <option value="">Selecciona el usuario</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @if(old('user_id') == $user->id) selected @endif>{{ $user->name }} {{ $user->lastname }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('user_id')
+                            <div class="text-danger text-center">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Crear Actividad</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 @stop
 
 @section('css')
@@ -144,5 +209,5 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
 @stop

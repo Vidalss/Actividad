@@ -21,7 +21,7 @@
                         <!-- Actividad -->
                         <div class="form-group">
                             <label for="activity">Actividad</label>
-                            <input type="text" name="activity" class="form-control @error('activity') is-invalid @enderror" value="{{ $activity->activity }}">
+                            <input type="text" id="activity" name="activity" class="form-control @error('activity') is-invalid @enderror" value="{{ $activity->activity }}">
                             @error('activity')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -32,7 +32,7 @@
                         <!-- Nombre -->
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $activity->name }}">
+                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $activity->name }}">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                         <!-- Objetivo -->
                         <div class="form-group">
                             <label for="objective">Objetivo</label>
-                            <input type="text" name="objective" class="form-control @error('objective') is-invalid @enderror" value="{{ $activity->objective }}">
+                            <input type="text" id="objective" name="objective" class="form-control @error('objective') is-invalid @enderror" value="{{ $activity->objective }}">
                             @error('objective')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                         <!-- Competencia -->
                         <div class="form-group">
                             <label for "competence">Competencia</label>
-                            <input type="text" name="competence" class="form-control @error('competence') is-invalid @enderror" value="{{ $activity->competence }}">
+                            <input type="text" id="competence" name="competence" class="form-control @error('competence') is-invalid @enderror" value="{{ $activity->competence }}">
                             @error('competence')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -65,24 +65,8 @@
                         <!-- Temario -->
                         <div class="form-group">
                             <label for="syllabus">Temario</label>
-                            <input type="text" name="syllabus" class="form-control @error('syllabus') is-invalid @enderror" value="{{ $activity->syllabus }}">
+                            <input type="text" id="syllabus" name="syllabus" class="form-control @error('syllabus') is-invalid @enderror" value="{{ $activity->syllabus }}">
                             @error('syllabus')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Periodo -->
-                        <div class="form-group">
-                            <label for="period_id">Periodo</label>
-                            <select name="period_id" class="form-control @error('period_id') is-invalid @enderror">
-                                <option value="">Seleccionar Periodo</option>
-                                @foreach ($periods as $period)
-                                    <option value="{{ $period->id }}" {{ $activity->period_id == $period->id ? 'selected' : '' }}>{{ $period->long_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('period_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -92,7 +76,7 @@
                         <!-- Autorizada -->
                         <div class="form-group">
                             <label for="authorized">Autorizada</label>
-                            <select name="authorized" class="form-control @error('authorized') is-invalid @enderror">
+                            <select name="authorized" id="authorized" class="form-control @error('authorized') is-invalid @enderror">
                                 <option value="yes" {{ $activity->authorized == 'yes' ? 'selected' : '' }}>Sí</option>
                                 <option value="no" {{ $activity->authorized == 'no' ? 'selected' : '' }}>No</option>
                             </select>
@@ -103,26 +87,10 @@
                             @enderror
                         </div>
 
-                        <!-- Staff -->
-                        <div class="form-group">
-                            <label for="staff_id">Staff</label>
-                            <select name="staff_id" class="form-control @error('staff_id') is-invalid @enderror">
-                                <option value="">Seleccionar Staff</option>
-                                @foreach ($staffs as $staff)
-                                    <option value="{{ $staff->id }}" {{ $activity->staff_id == $staff->id ? 'selected' : '' }}>{{ $staff->long_name }}</option>
-                                @endforeach
-                            </select>
-                            @error('staff_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
                         <!-- Créditos -->
                         <div class="form-group">
                             <label for="credits">Créditos</label>
-                            <input type="text" name="credits" class="form-control @error('credits') is-invalid @enderror" value="{{ $activity->credits }}">
+                            <input type="text" id='credits' name="credits" class="form-control @error('credits') is-invalid @enderror" value="{{ $activity->credits }}">
                             @error('credits')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

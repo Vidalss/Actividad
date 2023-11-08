@@ -67,13 +67,12 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-
         $periods = Period::all();
         $staffs = Staff::all();
         $users = User::all();
 
 
-        return view('activity.edit', compact('periods', 'staffs', 'users'));
+        return view('activity.edit', compact('activity','periods', 'staffs', 'users'));
     }
 
     /**
@@ -91,9 +90,6 @@ class ActivityController extends Controller
             'authorized' => 'required|in:yes,no',
             'activity' => 'required|integer',
             'credits' => 'required|integer',
-            'period_id' => 'required|exists:periods,id',
-            'staff_id' => 'required|exists:staff,id',
-            'user_id' => 'required|exists:users,id',
         ]);
 
         $activity->update($data);
